@@ -2,7 +2,9 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Products</h3>
+    <h3 class="panel-title">
+      <%= link_to 'Products', [:admin, :products] %>
+    </h3>
   </div>
   <div class="panel-body">
     Total products: <%= @num_products %>
@@ -11,7 +13,9 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Categories</h3>
+    <h3 class="panel-title">
+      <%= link_to 'Categories', [:admin, :root] %>
+    </h3>
   </div>
   <div class="panel-body">
     Total categories: <%= @num_categories %>
