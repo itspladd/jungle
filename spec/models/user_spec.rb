@@ -39,8 +39,9 @@ RSpec.describe User, type: :model do
                             password_confirmation: 'banana',
                             email: 'test@test.com',
                             email_confirmation: 'test@test.com'
-        expect(user2).not_to be_valid
+        expect(user2.errors.full_messages).to include "Email has already been taken"
       end
+
     end
   end
 end
