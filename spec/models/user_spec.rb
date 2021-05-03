@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'Validations' do
+  describe 'validations:' do
     describe 'password' do
       it 'should require both password and password_confirmation' do
         user1 = User.create password: 'banana',
@@ -26,6 +26,20 @@ RSpec.describe User, type: :model do
                             email: 'test@test.com',
                             email_confirmation: 'test@test.com'
         expect(user).to be_valid
+      end
+    end
+
+    describe 'email' do
+      it 'should require a unique email' do
+        user1 = User.create password: 'banana',
+                            password_confirmation: 'banana',
+                            email: 'test@test.com',
+                            email_confirmation: 'test@test.com'
+        user2 = User.create password: 'banana',
+                            password_confirmation: 'banana',
+                            email: 'test@test.com',
+                            email_confirmation: 'test@test.com'
+        expect(user2).not_to be_valid
       end
     end
   end
