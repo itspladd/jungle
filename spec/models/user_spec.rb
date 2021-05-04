@@ -74,19 +74,19 @@ RSpec.describe User, type: :model do
     it 'should return an instance of the user if successfully authenticated' do
       @user = User.create(@params)
       auth_user = User.authenticate_with_credentials(@params[:email], @params[:password])
-      expect(auth_user[:email]).to eq @user[:email]
+      expect(auth_user.email).to eq @user.email
     end
     it 'should authenticate properly regardless of leading/trailing whitespace' do
       @user = User.create(@params)
       @params[:email] = "   #{@params[:email]}  "
       auth_user = User.authenticate_with_credentials(@params[:email], @params[:password])
-      expect(auth_user[:email]).to eq @user[:email]
+      expect(auth_user.email).to eq @user.email
     end
     it 'should authenticate properly regardless of email case' do
       @params[:email] = @params[:email_confirmation] = "TeSt@tEst.COm"
       @user = User.create(@params)
       auth_user = User.authenticate_with_credentials("tEST@TeST.coM", @params[:password])
-      expect(auth_user[:email]).to eq @user[:email]
+      expect(auth_user.email).to eq @user.email
     end
     it 'should return nil if authentication is unsuccessful' do
       @user = User.create(@params)
