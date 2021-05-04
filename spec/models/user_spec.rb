@@ -76,5 +76,10 @@ RSpec.describe User, type: :model do
       auth_user = User.authenticate_with_credentials(@params[:email], @params[:password])
       expect(auth_user[:email]).to eq @params[:email]
     end
+    it 'should return nil if authentication is unsuccessful' do
+      @user = User.create(@params)
+      auth_user = User.authenticate_with_credentials(@params[:email], 'banana')
+      expect(auth_user).to be_nil
+    end
   end
 end
