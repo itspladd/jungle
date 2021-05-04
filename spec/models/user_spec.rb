@@ -82,9 +82,20 @@ RSpec.describe User, type: :model do
       auth_user = User.authenticate_with_credentials(@params[:email], @params[:password])
       expect(auth_user[:email]).to eq @user[:email]
     end
+    it 'should authenticate properly regardless of email case' do
+      @params[:email] = @params[:email_confirmation] = "TeSt@tEst.COm"
+      @user = User.create(@params)
+      auth_user = User.authenticate_with_credentials("tEST@TeST.coM", @params[:password])
+      expect(auth_user[:email]).to eq @user[:email]
+    end
     it 'should return nil if authentication is unsuccessful' do
       @user = User.create(@params)
       auth_user = User.authenticate_with_credentials(@params[:email], 'banana')
+      expect(auth_user).to be_nil
+    end
+    it 'should return nil if the user does not exist' do
+      @user = User.create(@params)
+      auth_user = User.authenticate_with_credentials('test@test.test', 'banana')
       expect(auth_user).to be_nil
     end
   end
