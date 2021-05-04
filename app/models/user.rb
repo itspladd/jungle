@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate_with_credentials(email, password)
     # Return the user if authentication is successful, or return nil if not.
-    User.find_by(email: email).authenticate(password) || nil
+    # Use .strip to remove whitespace from the email
+    User.find_by(email: email.strip).authenticate(password) || nil
   end
 end
