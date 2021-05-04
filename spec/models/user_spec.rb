@@ -1,18 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'validations:' do
-    before(:each) do
-      @params = {
-        first_name: 'Tautrion',
-        last_name: 'Stoneglutes',
-        email: 'goddess-king@petalsworn.clan',
-        email_confirmation: 'goddess-king@petalsworn.clan',
-        password: 'flowerDeity96',
-        password_confirmation: 'flowerDeity96'
-      }
-    end
+  before :each do
+    @params = {
+      first_name: 'Tautrion',
+      last_name: 'Stoneglutes',
+      email: 'goddess-king@petalsworn.clan',
+      email_confirmation: 'goddess-king@petalsworn.clan',
+      password: 'flowerDeity96',
+      password_confirmation: 'flowerDeity96'
+    }
+  end
 
+  describe 'validations:' do
     it 'should succeed when all parameters/confirmations are valid/present' do
       user = User.create @params
       expect(user).to be_valid
@@ -67,6 +67,14 @@ RSpec.describe User, type: :model do
         user = User.create @params.except(:last_name)
         expect(user.errors.full_messages).to include "Last name can't be blank"
       end
+    end
+  end
+
+  describe '.authenticate_with_credentials' do
+    it 'should return an instance of the user if successfully authenticated' do
+      @user = User.create(@params)
+      auth_user = User.authenticate_with_credentials(@params[:email], @params[:password])
+      expect(auth_user[:email]).to eq @params[:email]
     end
   end
 end
