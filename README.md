@@ -10,13 +10,13 @@ I worked on Jungle as a way to simulate the real-world situation of inheriting a
 
 The Order page shows users a nicely-formatted list of their purchases when their order is confirmed:
 
-<!-- image goes here -->
+<img src="https://github.com/itspladd/jungle/blob/master/docs/order_summary.gif" alt="An animated demonstration of the order-review process.">
 
 ### User Registration and Login
 
 I added the ability for visitors to create an account and log in. The site validates that their input email and password match the confirmation dialogs, and prevents multiple users from signing up with the same email address!
 
-<!-- image goes here -->
+<img src="https://github.com/itspladd/jungle/blob/master/docs/user_login.gif" alt="An animated demonstration of the user login process, demonstrating password and email confirmation behavior.">
 
 ### Testing with RSpec
 
